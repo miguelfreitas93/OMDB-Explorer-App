@@ -42,7 +42,7 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchView
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.search_movie_activiy);
 		ButterKnife.bind(this);
 		if (savedInstanceState != null) {
 			movieTitle = savedInstanceState.getString(Constants.MOVIE_TITLE);
