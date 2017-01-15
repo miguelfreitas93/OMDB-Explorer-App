@@ -1,0 +1,53 @@
+package miguel.freitas.omdb.app.view;
+
+import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import miguel.freitas.omdb.app.R;
+import miguel.freitas.omdb.app.core.models.MovieDetail;
+import miguel.freitas.omdb.app.core.utils.CommonUtils;
+import miguel.freitas.omdb.app.core.utils.Constants;
+import miguel.freitas.omdb.app.databinding.DetailActivityBinding;
+
+public class MovieDetailsActivity extends AppCompatActivity {
+
+	private static final String TAG = MovieDetailsActivity.class.getSimpleName();
+
+	@BindView(R.id.year)
+	TextView year;
+	@BindView(R.id.main_backdrop)
+	ImageView mainBackDrop;
+	@BindView(R.id.main_collapsing)
+	CollapsingToolbarLayout mainCollapsing;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		DetailActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.detail_activity);
+		ButterKnife.bind(this);
+
+		final MovieDetail detail = (MovieDetail) getIntent().getSerializableExtra(Constants.MOVIE_DETAIL);
+		final String imageUrl = getIntent().getStringExtra(Constants.IMAGE_URL);
+		Glide.with(this).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(mainBackDrop);
+
+		if(detail != null) {
+			mainCollapsing.setTitle(detail.getTitle());
+			binding.setMovieDetails(detail);
+			if (CommonUtils.isActualYear(detail.getYear())) {
+				year.setTextColor(Color.RED);
+				year.setTypeface(year.getTypeface(), Typeface.BOLD);
+			}
+		}
+	}
+}

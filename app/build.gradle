@@ -1,0 +1,92 @@
+apply plugin: 'com.android.application'
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 0 //dogfood builds, public betas...
+def versionFinal = versionMajor * 10000 + versionMinor*1000 + versionPatch*100 + versionBuild
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+    //ECLIPSE COMPATIBILITY
+    sourceSets {
+        main {
+            manifest {
+                srcFile 'src/main/AndroidManifest.xml'
+            }
+            java {
+                srcDir 'java'
+            }
+            res {
+                srcDir 'res'
+            }
+            assets {
+                srcDir 'assets'
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    dataBinding {
+        enabled = true
+    }
+    defaultConfig {
+        applicationId "miguel.freitas.omdb.app"
+        minSdkVersion 21
+        targetSdkVersion 25
+        vectorDrawables.useSupportLibrary = true
+        versionCode versionFinal
+        versionName versionMajor + "." + versionMinor + "." + versionPatch
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            testCoverageEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    def junit = "junit"
+    def junitVersion = ":4.12"
+    def mockito = "org.mockito"
+    def mockitoVersion = ":1.10.19"
+    def aSupport = "com.android.support"
+    def aSupportVersion = ":25.1.0"
+    def espresso = aSupport + ".test.espresso"
+    def espressoVersion = ":2.2.2"
+    def retrofit = "com.squareup.retrofit2"
+    def retrofitVersion = ":2.1.0"
+    def glide = "com.github.bumptech.glide"
+    def glideVersion = ":3.7.0"
+    def butterKnife = "com.jakewharton"
+    def butterKnifeVersion = ":8.4.0"
+
+    testCompile junit + ":junit" + junitVersion
+    testCompile mockito + ':mockito-core' + mockitoVersion
+    androidTestCompile espresso + ':espresso-core' + espressoVersion
+    androidTestCompile espresso + ':espresso-intents' + espressoVersion
+    compile aSupport + ":appcompat-v7" + aSupportVersion
+    compile aSupport + ":recyclerview-v7" + aSupportVersion
+    compile aSupport + ":gridlayout-v7" + aSupportVersion
+    compile aSupport + ":cardview-v7" + aSupportVersion
+    compile aSupport + ":design" + aSupportVersion
+    compile retrofit + ":retrofit" + retrofitVersion
+    compile retrofit + ":converter-gson" + retrofitVersion
+    compile glide + ":glide" + glideVersion
+    compile butterKnife +':butterknife' + butterKnifeVersion
+    annotationProcessor butterKnife + ':butterknife-compiler' + butterKnifeVersion
+}

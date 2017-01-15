@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- List Item Movie -->
+    <item name="thumbnail" type="id"/>
+    <item name="movie_title" type="id"/>
+    <item name="movie_director" type="id"/>
+    <item name="movie_year" type="id"/>
+    <!-- Search Movie Activity -->
+    <item name="progress_spinner" type="id"/>
+    <item name="recycler_view" type="id"/>
+    <item name="more" type="id"/>
+    <!-- Movie Details Activity -->
+    <item name="appbar" type="id"/>
+    <item name="main_collapsing" type="id"/>
+    <item name="main_backdrop" type="id"/>
+    <item name="main_toolbar" type="id"/>
+    <item name="title" type="id"/>
+    <item name="year" type="id"/>
+    <item name="type" type="id"/>
+    <item name="released" type="id"/>
+    <item name="runtime" type="id"/>
+    <item name="director" type="id"/>
+    <item name="genre" type="id"/>
+    <item name="writers" type="id"/>
+    <item name="actors" type="id"/>
+    <item name="plot" type="id"/>
+    <item name="imdbId" type="id"/>
+    <item name="rated" type="id"/>
+    <item name="language" type="id"/>
+    <item name="country" type="id"/>
+    <item name="awards" type="id"/>
+    <item name="metascore" type="id"/>
+    <item name="imdbRating" type="id"/>
+    <item name="imdbVotes" type="id"/>
+    <item name="tomatoMeter" type="id"/>
+    <item name="tomatoImage" type="id"/>
+    <item name="tomatoRating" type="id"/>
+    <item name="tomatoReviews" type="id"/>
+    <item name="tomatoFresh" type="id"/>
+    <item name="tomatoRotten" type="id"/>
+    <item name="tomatoConsensus" type="id"/>
+    <item name="tomatoUserMeter" type="id"/>
+    <item name="tomatoUserRating" type="id"/>
+    <item name="tomatoUserReviews" type="id"/>
+    <item name="tomatoURL" type="id"/>
+    <item name="dvd" type="id"/>
+    <item name="boxOffice" type="id"/>
+    <item name="production" type="id"/>
+    <item name="website" type="id"/>
+    <item name="grid_layout" type="id"/>
+    <!-- Menu -->
+    <item name="search" type="id"/>
+    <item name="filters" type="id"/>
+    <!-- Filters -->
+    <item name="spinnerYear" type="id"/>
+    <item name="spinnerType" type="id"/>
+</resources>

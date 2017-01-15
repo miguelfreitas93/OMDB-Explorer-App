@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="video_types">
+        <item>@string/all</item>
+        <item>@string/movie</item>
+        <item>@string/series</item>
+        <item>@string/episode</item>
+    </string-array>
+</resources>
