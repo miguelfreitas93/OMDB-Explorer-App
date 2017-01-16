@@ -2,10 +2,11 @@ package miguel.freitas.omdb.app.core.asynctasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import java.io.IOException;
@@ -28,15 +29,17 @@ public class SearchMovieAsyncTask extends AsyncTask<Void, Void, Void> {
 	private Result result;
 	private ProgressBar progressBar;
 	private MovieRecyclerViewAdapter movieRecyclerViewAdapter;
+	private ImageView appImage;
 	private int page;
 
-	public SearchMovieAsyncTask(Activity activity, RecyclerView recyclerView, String movieTitle, ProgressBar progressBar, String movieYear, String movieType) {
+	public SearchMovieAsyncTask(Activity activity, RecyclerView recyclerView, String movieTitle, ProgressBar progressBar, ImageView appImage, String movieYear, String movieType) {
 		this.recyclerView = recyclerView;
 		this.activity = activity;
 		this.movieTitle = movieTitle;
 		this.progressBar = progressBar;
 		this.movieType = movieType;
 		this.movieYear = movieYear;
+		this.appImage = appImage;
 		this.page = 1;
 	}
 
@@ -57,7 +60,14 @@ public class SearchMovieAsyncTask extends AsyncTask<Void, Void, Void> {
 			recyclerView.setAdapter(movieRecyclerViewAdapter);
 		}
 		progressBar.setVisibility(View.GONE);
-		recyclerView.setVisibility(View.VISIBLE);
+		if (result != null && result.getSearch() != null && result.getSearch().size() > 0) {
+			recyclerView.setVisibility(View.VISIBLE);
+			appImage.setVisibility(View.GONE);
+		} else {
+			recyclerView.setVisibility(View.GONE);
+			appImage.setVisibility(View.VISIBLE);
+			Snackbar.make(recyclerView, activity.getString(R.string.snackbar_title_not_found), Snackbar.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override

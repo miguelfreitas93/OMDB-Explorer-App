@@ -14,7 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@id/app_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="80dp"
+        android:src="@drawable/ic_movie"
+        android:contentDescription="@string/app_name"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@id/recycler_view"

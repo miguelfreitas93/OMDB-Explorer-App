@@ -5,6 +5,7 @@
     <item name="movie_title" type="id"/>
     <item name="movie_director" type="id"/>
     <item name="movie_year" type="id"/>
+    <item name="app_image" type="id"/>
     <!-- Search Movie Activity -->
     <item name="progress_spinner" type="id"/>
     <item name="recycler_view" type="id"/>

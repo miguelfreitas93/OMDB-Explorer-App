@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -36,6 +37,8 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchView
 	RecyclerView mMovieListRecyclerView;
 	@BindView(R.id.progress_spinner)
 	ProgressBar mProgressBar;
+	@BindView(R.id.app_image)
+	ImageView appImage;
 	private String movieTitle, movieYear, movieType;
 	private SearchMovieAsyncTask searchMovieAsyncTask;
 
@@ -83,8 +86,9 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchView
 			movieTitle = query;
 			CommonUtils.hideSoftKeyboard(this);
 			mProgressBar.setVisibility(View.VISIBLE);
+			appImage.setVisibility(View.GONE);
 			mMovieListRecyclerView.setVisibility(View.GONE);
-			searchMovieAsyncTask = new SearchMovieAsyncTask(this, mMovieListRecyclerView, query, mProgressBar, movieYear, movieType);
+			searchMovieAsyncTask = new SearchMovieAsyncTask(this, mMovieListRecyclerView, query, mProgressBar, appImage, movieYear, movieType);
 			searchMovieAsyncTask.execute();
 		} else {
 			Snackbar.make(mMovieListRecyclerView, getString(R.string.network_not_available), Snackbar.LENGTH_SHORT).show();
