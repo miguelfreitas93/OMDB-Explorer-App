@@ -45,13 +45,4 @@ public class SearchMovieActivityTest extends ActivityInstrumentationTestCase2<Se
 		onView(withText("50/50")).perform(click());
 		assertFalse(searchMovieActivityActivityTestRule.getActivity().isFinishing());
 	}
-
-	@Test
-	public void itemsNotFound() {
-		onView(withId(R.id.search)).perform(click());
-		onView(isAssignableFrom(EditText.class)).perform(typeText("50"), pressImeActionButton());
-		onView(withId(R.id.recycler_view)).check(matches(isDisplayed()));
-		onView(withText("50/50")).perform(click());
-		assertFalse(searchMovieActivityActivityTestRule.getActivity().isFinishing());
-	}
 }

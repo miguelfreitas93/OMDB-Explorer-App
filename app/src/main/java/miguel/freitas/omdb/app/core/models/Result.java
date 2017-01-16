@@ -1,47 +1,55 @@
 package miguel.freitas.omdb.app.core.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Result implements Serializable {
 
-    private List<Movie> Search;
-    private String totalResults;
-    private String Response;
+	private List<Movie> Search;
+	private String totalResults;
+	private String Response;
 
-    public Result() {
-    }
+	public Result() {
+	}
 
-    public List<Movie> getSearch() {
-        return Search;
-    }
+	public List<Movie> getSearch() {
+		return Search;
+	}
 
-    public void setSearch(List<Movie> search) {
-        this.Search = search;
-    }
+	public void setSearch(List<Movie> search) {
+		this.Search = search;
+	}
 
-    public String getTotalResults() {
-        return totalResults;
-    }
+	public void joinListOfResults(List<Movie> newSearch) {
+		List<Movie> union = new ArrayList<>();
+		union.addAll(newSearch);
+		union.addAll(Search);
+		setSearch(union);
+	}
 
-    public void setTotalResults(String totalResults) {
-        this.totalResults = totalResults;
-    }
+	public String getTotalResults() {
+		return totalResults;
+	}
 
-    public String getResponse() {
-        return Response;
-    }
+	public void setTotalResults(String totalResults) {
+		this.totalResults = totalResults;
+	}
 
-    public void setResponse(String response) {
-        this.Response = response;
-    }
+	public String getResponse() {
+		return Response;
+	}
 
-    @Override
-    public String toString() {
-        return "getMovieList{" +
-                "Search=" + Search +
-                ", totalResults='" + totalResults + '\'' +
-                ", Response='" + Response + '\'' +
-                '}';
-    }
+	public void setResponse(String response) {
+		this.Response = response;
+	}
+
+	@Override
+	public String toString() {
+		return "getMovieList{" +
+				"Search=" + Search +
+				", totalResults='" + totalResults + '\'' +
+				", Response='" + Response + '\'' +
+				'}';
+	}
 }

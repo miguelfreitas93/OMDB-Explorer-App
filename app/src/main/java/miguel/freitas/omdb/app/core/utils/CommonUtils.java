@@ -29,12 +29,18 @@ public class CommonUtils {
 	public static boolean isNetworkAvailable(Context c) {
 		ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+		if (cm != null) {
+			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+			if (activeNetwork != null) {
+				return activeNetwork.isConnectedOrConnecting();
+			}
+		}
+		return false;
 	}
 
 	public static boolean isActualYear(String year) {
-		return year.contains(Calendar.getInstance().get(Calendar.YEAR) + "");
+		Calendar calendar = Calendar.getInstance();
+		return year.contains(calendar.get(Calendar.YEAR) + "");
 	}
 
 	public static OmdbApiInterface getOmdbApiInterface() {

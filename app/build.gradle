@@ -55,6 +55,9 @@ android {
             versionNameSuffix '-DEBUG'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -68,6 +71,11 @@ dependencies {
     def aSupportVersion = ":25.1.0"
     def espresso = aSupport + ".test.espresso"
     def espressoVersion = ":2.2.2"
+    def hamcrest = "org.hamcrest"
+    def hamcrestVersion = ":1.3"
+    def asTest = aSupport + ".test"
+    def uiAutomator = asTest + ".uiautomator"
+    def uiAutomatorVersion = ":2.1.2"
     def retrofit = "com.squareup.retrofit2"
     def retrofitVersion = ":2.1.0"
     def glide = "com.github.bumptech.glide"
@@ -77,8 +85,10 @@ dependencies {
 
     testCompile junit + ":junit" + junitVersion
     testCompile mockito + ':mockito-core' + mockitoVersion
-    androidTestCompile espresso + ':espresso-core' + espressoVersion
-    androidTestCompile espresso + ':espresso-intents' + espressoVersion
+    androidTestCompile espresso + ":espresso-core" + espressoVersion
+    androidTestCompile espresso + ":espresso-intents" + espressoVersion
+    androidTestCompile hamcrest + ":hamcrest-library" + hamcrestVersion
+    androidTestCompile uiAutomator + ":uiautomator-v18" + uiAutomatorVersion
     compile aSupport + ":appcompat-v7" + aSupportVersion
     compile aSupport + ":recyclerview-v7" + aSupportVersion
     compile aSupport + ":gridlayout-v7" + aSupportVersion

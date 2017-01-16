@@ -26,10 +26,6 @@
             android:name=".view.MovieDetailsActivity"
             android:parentActivityName=".view.SearchMovieActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <!-- The meta-data element is needed for versions lower than 4.1 -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.SearchMovieActivity" />
         </activity>
     </application>
 </manifest>
