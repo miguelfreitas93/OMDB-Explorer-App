@@ -7,7 +7,7 @@
 
         <variable
             name="movieDetails"
-            type="miguel.freitas.omdb.app.core.models.MovieDetail"/>
+            type="mf.omdb.app.core.models.MovieDetail"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout

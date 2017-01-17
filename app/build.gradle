@@ -34,7 +34,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "miguel.freitas.omdb.app"
+        applicationId "mf.omdb.app"
         minSdkVersion 21
         targetSdkVersion 25
         vectorDrawables.useSupportLibrary = true
