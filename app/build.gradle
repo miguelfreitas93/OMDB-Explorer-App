@@ -86,9 +86,11 @@ dependencies {
     def glideVersion = ":3.7.0"
     def butterKnife = "com.jakewharton"
     def butterKnifeVersion = ":8.4.0"
+    def supportAnnotationsVersion = ":25.1.0"
 
     testCompile junit + ":junit" + junitVersion
     testCompile mockito + ':mockito-core' + mockitoVersion
+    androidTestCompile aSupport + ':support-annotations' + supportAnnotationsVersion
     androidTestCompile espresso + ":espresso-core" + espressoVersion
     androidTestCompile espresso + ":espresso-intents" + espressoVersion
     androidTestCompile hamcrest + ":hamcrest-library" + hamcrestVersion

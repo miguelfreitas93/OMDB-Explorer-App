@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mf.omdb.app.R;
@@ -46,17 +45,22 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieViewHold
 		final String title = movie.getTitle();
 		final String year = movie.getYear();
 		final String type = movie.getType();
+		int color;
+		int typeface;
+
 		holder.mDirectorView.setText(type);
 		holder.mTitleView.setText(title);
 		holder.mYearView.setText(year);
 
 		if (CommonUtils.isActualYear(year)) {
-			holder.mYearView.setTextColor(Color.RED);
-			holder.mYearView.setTypeface(holder.mYearView.getTypeface(), Typeface.BOLD);
+			color = Color.RED;
+			typeface = Typeface.BOLD;
 		} else {
-			holder.mYearView.setTextColor(Color.BLACK);
-			holder.mYearView.setTypeface(holder.mYearView.getTypeface(), Typeface.NORMAL);
+			color = Color.BLACK;
+			typeface = Typeface.NORMAL;
 		}
+		holder.mYearView.setTextColor(color);
+		holder.mYearView.setTypeface(holder.mYearView.getTypeface(), typeface);
 
 		final String imageUrl;
 		if (!movie.getPoster().equals(Constants.N_A)) {
@@ -83,14 +87,5 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieViewHold
 	public void onViewRecycled(MovieViewHolder holder) {
 		super.onViewRecycled(holder);
 		Glide.clear(holder.mThumbImageView);
-	}
-
-	public void joinList(List<Movie> newList) {
-		List<Movie> joinList = new ArrayList<>();
-		joinList.addAll(this.movieList);
-		joinList.addAll(newList);
-
-		this.movieList = joinList;
-		notifyDataSetChanged();
 	}
 }

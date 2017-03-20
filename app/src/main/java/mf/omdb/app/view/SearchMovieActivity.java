@@ -40,7 +40,6 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchView
 	@BindView(R.id.app_image)
 	ImageView appImage;
 	private String movieTitle, movieYear, movieType;
-	private SearchMovieAsyncTask searchMovieAsyncTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +87,7 @@ public class SearchMovieActivity extends AppCompatActivity implements SearchView
 			mProgressBar.setVisibility(View.VISIBLE);
 			appImage.setVisibility(View.GONE);
 			mMovieListRecyclerView.setVisibility(View.GONE);
-			searchMovieAsyncTask = new SearchMovieAsyncTask(this, mMovieListRecyclerView, query, mProgressBar, appImage, movieYear, movieType);
+			SearchMovieAsyncTask searchMovieAsyncTask = new SearchMovieAsyncTask(this, mMovieListRecyclerView, query, mProgressBar, appImage, movieYear, movieType);
 			searchMovieAsyncTask.execute();
 		} else {
 			Snackbar.make(mMovieListRecyclerView, getString(R.string.network_not_available), Snackbar.LENGTH_SHORT).show();
