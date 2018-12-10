@@ -37,7 +37,7 @@ else:
     git_repo_url = args[10]
     git_repo_branch = "refs/heads/" + args[11]
     git_private_key = ""
-    script_name = "TravisCI_Script"
+    script_name = "TravisCIScript"
     print(args)
  
     def get_threshold(args_list, index):
