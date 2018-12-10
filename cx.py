@@ -1,3 +1,4 @@
+import zipfile
 import sys
 import requests
 import time
@@ -6,7 +7,7 @@ import xmltodict
 args = sys.argv
 requests_rate = 10 #seconds
  
-if len(args) < 12 or len(args) > 15:
+if len(args) < 11 or len(args) > 14:
     print(args)
     print("Missing Arguments : this script should only include 7 parameters: "
           "\n<Server>"  # Server URL Ex.: http://localhost
@@ -18,8 +19,7 @@ if len(args) < 12 or len(args) > 15:
           "\n<Preset Name>"  # Cx Preset Name
           "\n<Folder Exclusions>"  # Folder Exclusions
           "\n<File Exclusions>"  # File Exclusions
-          "\n<GIT Repo URL>"  # GIT Repository URL
-          "\n<GIT Repo Branch>"  # GIT Repository Branch
+          "\n<Source Code Folder>"  # Source Code Folder
           "\n<High Threshold (Optional)>"  # Minimum Number of High Results allowed, if higher build will fail
           "\n<Medium Threshold (Optional)>"  # Minimum Number of Medium Results allowed, if higher build will fail
           "\n<Low Threshold (Optional)>")  # Minimum Number of Low Results allowed, if higher build will fail
@@ -34,9 +34,7 @@ else:
     preset_name = args[7]
     folder_exclusions = args[8]
     file_exclusions = args[9]
-    git_repo_url = args[10]
-    git_repo_branch = "refs/heads/" + args[11]
-    git_private_key = ""
+    filePath = args[10]
     script_name = "TravisCIScript"
     print(args)
  
@@ -46,9 +44,9 @@ else:
         else:
             return 0
  
-    highThreshold = get_threshold(args, 12)
-    mediumThreshold = get_threshold(args, 13)
-    lowThreshold = get_threshold(args, 14)
+    highThreshold = get_threshold(args, 11)
+    mediumThreshold = get_threshold(args, 12)
+    lowThreshold = get_threshold(args, 13)
  
     endpoint_server = server + "/cxrestapi/"
     print(endpoint_server)
@@ -113,21 +111,28 @@ else:
             return project_response.json()
         else:
             return False
+
+     def zipfolder(foldername, target_dir):            
+        zipobj = zipfile.ZipFile(foldername + '.zip', 'w', zipfile.ZIP_DEFLATED)
+        rootlen = len(target_dir) + 1
+        for base, dirs, files in os.walk(target_dir):
+            for file in files:
+                fn = os.path.join(base, file)
+                zipobj.write(fn, fn[rootlen:])
  
- 
-    def set_project_git_settings(project_id, git_repo_url, git_repo_branch, git_private_key):
-        git_settings_data = {
-            "url": git_repo_url,
-            "branch": git_repo_branch,
-            "privateKey": git_private_key
+    def upload_project_source_code(project_id, file_path):
+        zipfolder("temporary", file_path)
+        file = {
+            'zippedSource': open("temporary.zip", 'rb')
         }
-        git_settings_response = requests.post(
-            endpoint_server + "/projects/" + str(project_id) + "/sourceCode/remoteSettings/git", headers=headers,
-            data=git_settings_data)
-        if git_settings_response.status_code == 204:
+
+        upload_source_code_response = requests.post(
+            endpoint_server + "/projects/" + str(project_id) + "/sourceCode/attachments", headers=headers,
+            files=file)
+        if upload_source_code_response.status_code == 204:
             return True
         else:
-            error(git_settings_response)
+            error(upload_source_code_response)
             return False
  
  
@@ -396,11 +401,11 @@ else:
             project_id = str(get_projects_by_name(project_name))
      
         print("Project : " + project_name + " - " + project_id)
-        git_settings_updated = set_project_git_settings(project_id, git_repo_url, git_repo_branch, git_private_key)
-        if git_settings_updated:
-            print("Git Setting Updated")
+        source_code_updated = upload_project_source_code(project_id, filePath)
+        if source_code_updated:
+            print("Source Code Updated")
         else:
-            print("Git Setting Error")
+            print("Source Code Error")
      
         exclude_settings_updated = set_project_exclude_settings(project_id, folder_exclusions, file_exclusions)
         if exclude_settings_updated:
