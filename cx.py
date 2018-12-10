@@ -233,6 +233,8 @@ else:
                     return error(get_scan_response)
             print_status("Scan Finished", project_name, scan_id)
             return scan_id
+        else:
+            return error(start_scan_response)
  
  
     def generate_report(scan_id, project_name):
