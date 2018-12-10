@@ -383,46 +383,49 @@ else:
     project_id = "0"
     team_id = get_team_by_name(team_name)
  
-    print(team_id)
-
-    project_was_created = create_project(project_name, team_id)
-    if project_was_created:
-        print("Project Created")
-        project_id = str(project_was_created['id'])
+    if team_id:
+        project_was_created = create_project(project_name, team_id)
+        if project_was_created:
+            print("Project Created")
+            project_id = str(project_was_created['id'])
+        else:
+            print("Project Already Exists")
+            project_id = str(get_projects_by_name(project_name))
+     
+        print("Project : " + project_name + " - " + project_id)
+        git_settings_updated = set_project_git_settings(project_id, git_repo_url, git_repo_branch, git_private_key)
+        if git_settings_updated:
+            print("Git Setting Updated")
+        else:
+            print("Git Setting Error")
+     
+        exclude_settings_updated = set_project_exclude_settings(project_id, folder_exclusions, file_exclusions)
+        if exclude_settings_updated:
+            print("Exclude Setting Updated")
+        else:
+            print("Exclude Setting Error")
+     
+        preset_id = str(get_preset_by_name(preset_name))
+     
+        engine_id = str(get_engine_server())
+     
+        project_updated = update_project_configuration(project_id, preset_id, engine_id)
+        if project_updated:
+            print("Project Configuration Updated")
+        else:
+            print("Project Configuration Error")
+     
+        scan_id = scan_project(project_id, project_name)
+     
+        xml = generate_report(scan_id, project_name)
+     
+        if xml:
+            document = xmltodict.parse(xml)
+            parse_xml(document, highThreshold, mediumThreshold, lowThreshold)
+        else:
+            print("Error retrieving the XML Results")
+            exit(2)
     else:
-        print("Project Already Exists")
-        project_id = str(get_projects_by_name(project_name))
- 
-    print("Project : " + project_name + " - " + project_id)
-    git_settings_updated = set_project_git_settings(project_id, git_repo_url, git_repo_branch, git_private_key)
-    if git_settings_updated:
-        print("Git Setting Updated")
-    else:
-        print("Git Setting Error")
- 
-    exclude_settings_updated = set_project_exclude_settings(project_id, folder_exclusions, file_exclusions)
-    if exclude_settings_updated:
-        print("Exclude Setting Updated")
-    else:
-        print("Exclude Setting Error")
- 
-    preset_id = str(get_preset_by_name(preset_name))
- 
-    engine_id = str(get_engine_server())
- 
-    project_updated = update_project_configuration(project_id, preset_id, engine_id)
-    if project_updated:
-        print("Project Configuration Updated")
-    else:
-        print("Project Configuration Error")
- 
-    scan_id = scan_project(project_id, project_name)
- 
-    xml = generate_report(scan_id, project_name)
- 
-    if xml:
-        document = xmltodict.parse(xml)
-        parse_xml(document, highThreshold, mediumThreshold, lowThreshold)
-    else:
-        print("Error retrieving the XML Results")
+        print("Invalid Team Name")
+        print(team_name)
         exit(2)
