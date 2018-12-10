@@ -92,7 +92,9 @@ else:
         teams_response = requests.get(endpoint_server + "/auth/teams", headers=headers)
         if teams_response.status_code == 200:
             teams = teams_response.json()
+            print(teams)
             for team in teams:
+                print(team)
                 if team['fullName'] == team_name:
                     return team['id']
             return []
