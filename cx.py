@@ -37,6 +37,7 @@ else:
     git_repo_url = args[10]
     git_repo_branch = "refs/heads/" + args[11]
     git_private_key = ""
+    script_name = "TravisCI_Script"
     print(args)
  
     def get_threshold(args_list, index):
@@ -213,7 +214,7 @@ else:
         }
         headersScanProject = {
             "Authorization": token,
-            "cxOrigin": "BitbucketPipeline"
+            "cxOrigin": script_name
         }
         start_scan_response = requests.post(endpoint_server + "/sast/scans", headers=headersScanProject, data=data)
         if start_scan_response.status_code == 201:
@@ -373,7 +374,7 @@ else:
  
             if highs > high_threshold or mediums > medium_threshold or lows > low_threshold:
                 print("\n\nERROR : Insecure application !!!")
-                exit(3)
+                exit(0)
             else:
                 print("\n\nSUCCESS : Secure application !!!")
                 exit(0)
