@@ -93,9 +93,7 @@ else:
         teams_response = requests.get(endpoint_server + "/auth/teams", headers=headers)
         if teams_response.status_code == 200:
             teams = teams_response.json()
-            print(teams)
             for team in teams:
-                print(team)
                 if team['fullName'] == team_name:
                     return team['id']
             return []
@@ -420,13 +418,17 @@ else:
      
         scan_id = scan_project(project_id, project_name)
      
-        xml = generate_report(scan_id, project_name)
-     
-        if xml:
-            document = xmltodict.parse(xml)
-            parse_xml(document, highThreshold, mediumThreshold, lowThreshold)
+        if scan_id:
+            xml = generate_report(scan_id, project_name)
+         
+            if xml:
+                document = xmltodict.parse(xml)
+                parse_xml(document, highThreshold, mediumThreshold, lowThreshold)
+            else:
+                print("Error retrieving the XML Results")
+                exit(2)
         else:
-            print("Error retrieving the XML Results")
+            print("Invalid Scan Id - " + scan_id)
             exit(2)
     else:
         print("Invalid Team Name")
