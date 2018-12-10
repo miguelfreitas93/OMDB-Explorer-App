@@ -374,7 +374,7 @@ else:
  
             if highs > high_threshold or mediums > medium_threshold or lows > low_threshold:
                 print("\n\nERROR : Insecure application !!!")
-                exit(0)
+                exit(3)
             else:
                 print("\n\nSUCCESS : Secure application !!!")
                 exit(0)
