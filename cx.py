@@ -112,7 +112,8 @@ else:
         else:
             return False
 
-     def zipfolder(foldername, target_dir):            
+    
+    def zipfolder(foldername, target_dir):            
         zipobj = zipfile.ZipFile(foldername + '.zip', 'w', zipfile.ZIP_DEFLATED)
         rootlen = len(target_dir) + 1
         for base, dirs, files in os.walk(target_dir):
