@@ -50,6 +50,7 @@ else:
     lowThreshold = get_threshold(args, 14)
  
     endpoint_server = server + "/cxrestapi/"
+    print(endpoint_server)
  
     def get_oauth2_token():
         oauth2_data = {
@@ -382,6 +383,8 @@ else:
     project_id = "0"
     team_id = get_team_by_name(team_name)
  
+    print(team_id)
+
     project_was_created = create_project(project_name, team_id)
     if project_was_created:
         print("Project Created")
