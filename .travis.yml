@@ -1,0 +1,7 @@
+language: python
+python:
+  - "3.6"
+install:
+  - pip install -r requirements.txt
+script:
+  - echo $Server $CxUsername $CxPassword $ClientSecret $ProjectName $TeamName $PresetName $FolderExclusions $FileExclusions https://bitbucket.org/$BITBUCKET_REPO_OWNER/$BITBUCKET_REPO_SLUG.git "master" $HighThreshold $MediumThreshold $LowThreshold
