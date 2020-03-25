@@ -7,40 +7,19 @@ def versionBuild = 0 //dogfood builds, public betas...
 def versionFinal = versionMajor * 10000 + versionMinor*1000 + versionPatch*100 + versionBuild
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
-    //ECLIPSE COMPATIBILITY
-    sourceSets {
-        main {
-            manifest {
-                srcFile 'src/main/AndroidManifest.xml'
-            }
-            java {
-                srcDir 'java'
-            }
-            res {
-                srcDir 'res'
-            }
-            assets {
-                srcDir 'assets'
-            }
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
+    compileSdkVersion 29
+    buildToolsVersion '25.0.3'
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "mf.omdb.app"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 29
         vectorDrawables.useSupportLibrary = true
         versionCode versionFinal
         versionName versionMajor + "." + versionMinor + "." + versionPatch
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -65,44 +44,23 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    def junit = "junit"
-    def junitVersion = ":4.12"
-    def mockito = "org.mockito"
-    def mockitoVersion = ":1.10.19"
-    def aSupport = "com.android.support"
-    def aSupportVersion = ":25.1.0"
-    def espresso = aSupport + ".test.espresso"
-    def espressoVersion = ":2.2.2"
-    def hamcrest = "org.hamcrest"
-    def hamcrestVersion = ":1.3"
-    def asTest = aSupport + ".test"
-    def uiAutomator = asTest + ".uiautomator"
-    def uiAutomatorVersion = ":2.1.2"
-    def retrofit = "com.squareup.retrofit2"
-    def retrofitVersion = ":2.1.0"
-    def glide = "com.github.bumptech.glide"
-    def glideVersion = ":3.7.0"
-    def butterKnife = "com.jakewharton"
-    def butterKnifeVersion = ":8.4.0"
-    def supportAnnotationsVersion = ":25.1.0"
-
-    testCompile junit + ":junit" + junitVersion
-    testCompile mockito + ':mockito-core' + mockitoVersion
-    androidTestCompile aSupport + ':support-annotations' + supportAnnotationsVersion
-    androidTestCompile espresso + ":espresso-core" + espressoVersion
-    androidTestCompile espresso + ":espresso-intents" + espressoVersion
-    androidTestCompile hamcrest + ":hamcrest-library" + hamcrestVersion
-    androidTestCompile uiAutomator + ":uiautomator-v18" + uiAutomatorVersion
-    compile aSupport + ":appcompat-v7" + aSupportVersion
-    compile aSupport + ":recyclerview-v7" + aSupportVersion
-    compile aSupport + ":gridlayout-v7" + aSupportVersion
-    compile aSupport + ":cardview-v7" + aSupportVersion
-    compile aSupport + ":design" + aSupportVersion
-    compile retrofit + ":retrofit" + retrofitVersion
-    compile retrofit + ":converter-gson" + retrofitVersion
-    compile glide + ":glide" + glideVersion
-    compile butterKnife +':butterknife' + butterKnifeVersion
-    annotationProcessor butterKnife + ':butterknife-compiler' + butterKnifeVersion
+    testImplementation "junit:junit:4.13"
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation "org.hamcrest:hamcrest-library:1.3"
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation "com.squareup.retrofit2:retrofit:2.7.1"
+    implementation "com.squareup.retrofit2:converter-gson:2.7.1"
+    implementation "com.github.bumptech.glide:glide:4.11.0"
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }

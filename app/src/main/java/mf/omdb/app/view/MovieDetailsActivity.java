@@ -1,16 +1,16 @@
 package mf.omdb.app.view;
 
-import android.databinding.DataBindingUtil;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +39,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
 		final MovieDetail detail = (MovieDetail) getIntent().getSerializableExtra(Constants.MOVIE_DETAIL);
 		final String imageUrl = getIntent().getStringExtra(Constants.IMAGE_URL);
-		Glide.with(this).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(mainBackDrop);
+		Glide.with(this).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(mainBackDrop);
 
 		if (detail != null) {
 			mainCollapsing.setTitle(detail.getTitle());

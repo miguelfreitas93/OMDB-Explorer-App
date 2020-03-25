@@ -3,10 +3,11 @@ package mf.omdb.app.core.adapters;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -70,7 +71,7 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieViewHold
 		}
 
 		holder.mThumbImageView.layout(0, 0, 0, 0); // invalidate the width so that glide wont use that dimension
-		Glide.with(activity).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder.mThumbImageView);
+		Glide.with(activity).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(holder.mThumbImageView);
 
 		holder.mView.setOnClickListener(new MovieOnClickListener(activity, movie, holder.mThumbImageView, imageUrl));
 	}
@@ -86,6 +87,5 @@ public class MovieRecyclerViewAdapter extends RecyclerView.Adapter<MovieViewHold
 	@Override
 	public void onViewRecycled(MovieViewHolder holder) {
 		super.onViewRecycled(holder);
-		Glide.clear(holder.mThumbImageView);
 	}
 }

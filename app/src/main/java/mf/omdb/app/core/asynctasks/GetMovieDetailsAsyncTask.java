@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.widget.ImageView;
+
+import androidx.core.app.ActivityOptionsCompat;
 
 import java.io.IOException;
 

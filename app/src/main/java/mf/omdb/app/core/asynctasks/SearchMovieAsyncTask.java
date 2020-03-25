@@ -2,12 +2,14 @@ package mf.omdb.app.core.asynctasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 
