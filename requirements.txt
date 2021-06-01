@@ -1,6 +1,6 @@
 requests==2.20.0
 urllib3==1.26.5
 xmltodict==0.11.0
-chardet==3.0.4
+chardet==4.0.0
 certifi==2018.1.18
 idna==3.2
