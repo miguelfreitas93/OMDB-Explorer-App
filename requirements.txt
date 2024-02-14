@@ -3,4 +3,4 @@ urllib3==2.2.0
 xmltodict==0.13.0
 chardet==5.2.0
 idna==3.6
-certifi==2023.11.17
+certifi==2024.2.2
