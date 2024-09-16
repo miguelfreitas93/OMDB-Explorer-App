@@ -2,5 +2,5 @@ requests==2.32.3
 urllib3==2.2.2
 xmltodict==0.13.0
 chardet==5.2.0
-idna==3.7
+idna==3.10
 certifi==2024.6.2
